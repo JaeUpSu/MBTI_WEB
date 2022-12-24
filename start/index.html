@@ -13,6 +13,8 @@
     />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/default.css" />
+    <link rel="stylesheet" href="/css/qna.css" />
+    <link rel="stylesheet" href="/css/animation.css" />
   </head>
 
   <body>
@@ -26,11 +28,17 @@
           나만의 MBTI 사이트입니다! <br />
           아래 시작하기 버튼을 눌러 시작해 주세요.
         </p>
-        <button type="button" class="btn btn-outline-danger mt-3">
+        <button
+          type="button"
+          class="btn btn-outline-danger mt-3"
+          onclick="js:begin()"
+        >
           시작하기
         </button>
       </section>
-      <section id="qna"></section>
+      <section id="qna">
+        <p>test</p>
+      </section>
       <section id="result"></section>
     </div>
     <script
@@ -38,5 +46,6 @@
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"
     ></script>
+    <script src="./js/start.js" charset="utf-8"></script>
   </body>
 </html>
