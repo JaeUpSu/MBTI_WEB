@@ -1,10 +1,18 @@
 const main = document.getElementById("main");
 const qna = document.getElementById("qna");
+const endPoint = 12;
 
+// click 이벤트 연결, 지금 화면 안보이게 하기
+// button 을 생성하여 포맷 맞추고 text 입력
 function addAnswer(answerText, qIdx) {
   const a = document.querySelector(".answerBox");
   const answer = document.createElement("button");
   answer.classList.add("answerList");
+  answer.classList.add("my-3");
+  answer.classList.add("py-3");
+  answer.classList.add("mx-auto");
+  answer.classList.add("fadeIn");
+
   a.appendChild(answer);
   answer.innerHTML = answerText;
 
@@ -14,22 +22,37 @@ function addAnswer(answerText, qIdx) {
       const children = document.querySelectorAll(".answerList");
       for (let i = 0; i < children.length; i++) {
         children[i].disabled = true;
-        children[i].style.display = "none";
+        children[i].style.WebkitAnimation = "fadeOut 0.5s";
+        children[i].style.animation = "fadeOut 0.5s";
       }
-      goNext(++qIdx);
+
+      // 일정 시간이 지난 후 정해진 코드 실행
+      setTimeout(() => {
+        for (let i = 0; i < children.length; i++) {
+          children[i].style.display = "none";
+        }
+        goNext(++qIdx);
+      }, 450);
     },
     false
   );
 }
 
+// qna 해당 순서 내용 출력
+// qna 진행 스테이스 바 qIdx 만큼 % 표시
+// for(let i in List)
 function goNext(qIdx) {
   const qBox = document.querySelector(".qBox");
   qBox.innerHTML = qnaList[qIdx].q;
   for (let i in qnaList[qIdx].a) {
     addAnswer(qnaList[qIdx].a[i].answer, qIdx);
   }
+  const status = document.querySelector(".statusBar");
+  status.style.width = (100 / endPoint) * (qIdx + 1) + "%";
 }
 
+// 시작할 때 기능
+// qna 창 열기 & main 창 닫기
 function begin() {
   main.style.WebkitAnimation = "fadeOut 1s";
   main.style.animation = "fadeOut 1s";
