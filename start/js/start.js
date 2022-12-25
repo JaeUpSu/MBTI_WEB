@@ -1,6 +1,20 @@
 const main = document.getElementById("main");
 const qna = document.getElementById("qna");
+const result = document.getElementById("result");
 const endPoint = 12;
+
+function goResult() {
+  qna.style.WebkitAnimation = "fadeOut 1s";
+  qna.style.animation = "fadeOut 1s";
+  setTimeout(() => {
+    result.style.WebkitAnimation = "fadeIn 1s";
+    result.style.animation = "fadeIn 1s";
+    setTimeout(() => {
+      qna.style.display = "none";
+      result.style.display = "block";
+    }, 500);
+  });
+}
 
 // click 이벤트 연결, 지금 화면 안보이게 하기
 // button 을 생성하여 포맷 맞추고 text 입력
@@ -42,6 +56,10 @@ function addAnswer(answerText, qIdx) {
 // qna 진행 스테이스 바 qIdx 만큼 % 표시
 // for(let i in List)
 function goNext(qIdx) {
+  if (qIdx + 1 === endPoint) {
+    goResult();
+    return;
+  }
   const qBox = document.querySelector(".qBox");
   qBox.innerHTML = qnaList[qIdx].q;
   for (let i in qnaList[qIdx].a) {
