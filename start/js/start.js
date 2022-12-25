@@ -1,18 +1,32 @@
 const main = document.getElementById("main");
 const qna = document.getElementById("qna");
 
-function addAnswer(answerText) {
+function addAnswer(answerText, qIdx) {
   const a = document.querySelector(".answerBox");
-  const answer = document.createElement("Button");
+  const answer = document.createElement("button");
+  answer.classList.add("answerList");
   a.appendChild(answer);
   answer.innerHTML = answerText;
+
+  answer.addEventListener(
+    "click",
+    () => {
+      const children = document.querySelectorAll(".answerList");
+      for (let i = 0; i < children.length; i++) {
+        children[i].disabled = true;
+        children[i].style.display = "none";
+      }
+      goNext(++qIdx);
+    },
+    false
+  );
 }
 
 function goNext(qIdx) {
   const qBox = document.querySelector(".qBox");
   qBox.innerHTML = qnaList[qIdx].q;
   for (let i in qnaList[qIdx].a) {
-    addAnswer(qnaList[qIdx].a[i].answer);
+    addAnswer(qnaList[qIdx].a[i].answer, qIdx);
   }
 }
 
